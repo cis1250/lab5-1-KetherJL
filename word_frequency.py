@@ -50,6 +50,5 @@ def main():
     split_sentence, o_sentence = get_sentence()
     words, frequencies = calculate_frequency(split_sentence)
     print_frequencies(words, frequencies)
-
-if __name__ == "__main__":
+    
     main()
