@@ -1,11 +1,6 @@
-#!/usr/bin/env python3
-
-# Word frequency exercise
-# TODO: (Read detailed instructions in the Readme file)
-
 import re
 
-#This is a function that checks if a text qualifies as a sentence. You do not need to modify this!
+# This is a function that checks if a text qualifies as a sentence.
 def is_sentence(text):
     # Check if the text is not empty and is a string
     if not isinstance(text, str) or not text.strip():
@@ -24,3 +19,40 @@ def is_sentence(text):
         return False
 
     return True
+
+def get_sentence():
+    user_sentence = input("Enter a sentence: ")
+    while (is_sentence(user_sentence) == False):
+        print("This does not meet the criteria for a sentence.")
+        user_sentence = input("Enter a sentence: ")
+
+    # Clean sentence: remove punctuation/numbers, make lowercase, split into words
+    cleaned = re.sub(r'[^\w\s]', '', user_sentence)  
+    split_sentence = cleaned.lower().split()
+    return user_sentence, split_sentence
+
+def calculate_frequencies(split_sentence):
+    list_a = [] #for words
+    list_b = [] #for frequncies
+
+    for word in split_sentence:
+        if word not in list_a:
+            list_a.append(word)
+            list_b.append(1)
+        else:
+            index = list_a.index(word)
+            list_b[index] += 1
+
+    return list_a, list_b
+
+def print_frequencies(words, frequencies):
+    for i in range(len(words)):
+        print(f"{words[i]}: {frequencies[i]}")
+
+def main():
+    split_sentence = get_sentence()
+    words, frequencies = calculate_frequencies(split_sentence)
+    print_frequencies(words, frequencies)
+
+if __name__ == "__main__":
+    main()
