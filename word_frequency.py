@@ -20,21 +20,19 @@ def is_sentence(text):
 
     return True
 
+# Cleans sentence
 def get_sentence():
     user_sentence = input("Enter a sentence: ")
     while (is_sentence(user_sentence) == False):
         print("This does not meet the criteria for a sentence.")
         user_sentence = input("Enter a sentence: ")
-
-    # Clean sentence: remove punctuation/numbers, make lowercase, split into words
-    cleaned = re.sub(r'[^\w\s]', '', user_sentence)  
+    cleaned = re.sub(r'[^\w\s]', '', user_sentence)
     split_sentence = cleaned.lower().split()
-    return user_sentence, split_sentence
+    return split_sentence, user_sentence
 
-def calculate_frequencies(split_sentence):
+def calculate_frequency(split_sentence):
     list_a = [] #for words
-    list_b = [] #for frequncies
-
+    list_b = [] #for frequencies
     for word in split_sentence:
         if word not in list_a:
             list_a.append(word)
@@ -42,7 +40,6 @@ def calculate_frequencies(split_sentence):
         else:
             index = list_a.index(word)
             list_b[index] += 1
-
     return list_a, list_b
 
 def print_frequencies(words, frequencies):
@@ -50,8 +47,8 @@ def print_frequencies(words, frequencies):
         print(f"{words[i]}: {frequencies[i]}")
 
 def main():
-    split_sentence = get_sentence()
-    words, frequencies = calculate_frequencies(split_sentence)
+    split_sentence, o_sentence = get_sentence()
+    words, frequencies = calculate_frequency(split_sentence)
     print_frequencies(words, frequencies)
 
 if __name__ == "__main__":
