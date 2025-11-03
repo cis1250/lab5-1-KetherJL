@@ -26,3 +26,5 @@ def make_fib():
     fib(n)
 
 make_fib()
+
+#TA: You should've had a third seperate function for printing the sequence.
